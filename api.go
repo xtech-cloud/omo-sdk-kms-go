@@ -36,7 +36,7 @@ func VerifyLicense(_license string, _appKey string, _appSecret string, _deviceCo
 	payload_ciphertext, err := aesEncrypt([]byte(payload), []byte(passwd))
 	payload_md5 := toMD5(payload_ciphertext)
 	//take cer
-	cer_ciphertext, err := base64Coder.DecodeString(lines[13])
+	cer_ciphertext, err := base64Coder.DecodeString(lines[11])
 	if nil != err {
 		return 3, err
 	}
@@ -46,7 +46,7 @@ func VerifyLicense(_license string, _appKey string, _appSecret string, _deviceCo
 	}
 
 	//take sig
-	sig_ciphertext, err := base64Coder.DecodeString(lines[15])
+	sig_ciphertext, err := base64Coder.DecodeString(lines[13])
 	if nil != err {
 		return 5, err
 	}
@@ -56,12 +56,12 @@ func VerifyLicense(_license string, _appKey string, _appSecret string, _deviceCo
 		return 6, err
 	}
 
-	timestamp, err := strconv.ParseInt(lines[7], 10, 64)
+	timestamp, err := strconv.ParseInt(lines[5], 10, 64)
 	if nil != err {
 		return 7, err
 	}
 
-	expiry, err := strconv.ParseInt(lines[9], 10, 64)
+	expiry, err := strconv.ParseInt(lines[7], 10, 64)
 	if nil != err {
 		return 8, err
 	}
